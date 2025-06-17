@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/data.dart';
 import '../core/models/context_menu_entry.dart';
 import '../core/models/context_menu_item.dart';
 import '../core/utils/extensions.dart';
@@ -63,21 +64,26 @@ final class MenuItem<T> extends ContextMenuItem<T> {
       [FocusNode? focusNode]) {
     bool isFocused = menuState.focusedEntry == this;
 
-    final background = context.colorScheme.surface;
-    final focusedBackground = context.colorScheme.surfaceContainer;
-    final normalTextColor = Color.alphaBlend(
-      (color ?? context.colorScheme.onSurface).withValues(alpha: 0.7),
-      background,
-    );
-    final focusedTextColor = color ?? context.colorScheme.onSurface;
-    final disabledTextColor =
-        context.colorScheme.onSurface.withValues(alpha: 0.2);
+    final background =
+        FlutterContextMenuData_c.itemBgColor ?? context.colorScheme.surface;
+    final focusedBackground = FlutterContextMenuData_c.itemFgColor ??
+        context.colorScheme.surfaceContainer;
+
+    final normalTextColor = FlutterContextMenuData_c.normalColor;
+    final focusedTextColor = color ?? FlutterContextMenuData_c.focusColor;
+    final disabledTextColor = FlutterContextMenuData_c.disableColor;
     final foregroundColor = !enabled
         ? disabledTextColor
         : isFocused
             ? focusedTextColor
             : normalTextColor;
-    final textStyle = TextStyle(color: foregroundColor, height: 1.0);
+
+    var textStyle = (!enabled
+        ? FlutterContextMenuData_c.disableTextStyle
+        : isFocused
+            ? FlutterContextMenuData_c.focusTextStyle
+            : FlutterContextMenuData_c.normalTextStyle);
+    textStyle ??= TextStyle(color: foregroundColor, height: 1.0);
 
     // ~~~~~~~~~~ //
 
