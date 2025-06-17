@@ -17,13 +17,13 @@ import '../utils/extensions.dart';
 ) {
   final screenSize = MediaQuery.of(context).size;
   final safeScreenRect = (Offset.zero & screenSize).deflate(8.0);
-  final menuRect = context.getWidgetBounds()!;
+  final menuRect = context.getWidgetBounds(menu.position)!;
   AlignmentGeometry nextSpawnAlignment = spawnAlignment;
 
   // final parentRect = menu.parentItemRect;
 
-  double x = menuRect.left;
-  double y = menuRect.top;
+  double x = menu.position?.dx ?? 0;
+  double y = menu.position?.dy ?? 0;
 
   bool isWidthExceed() => x + menuRect.width > screenSize.width || x < 0;
 

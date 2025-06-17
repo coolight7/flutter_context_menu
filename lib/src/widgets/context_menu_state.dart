@@ -144,7 +144,7 @@ class ContextMenuState extends ChangeNotifier {
     closeSubmenu();
 
     final items = parent.items;
-    final submenuParentRect = context.getWidgetBounds();
+    final submenuParentRect = context.getWidgetBounds(menu.position);
     if (submenuParentRect == null) return;
 
     final submenuPosition =
@@ -189,7 +189,6 @@ class ContextMenuState extends ChangeNotifier {
         _spawnAnchor,
         _isSubmenu,
       );
-
       menu.position = boundaries.pos;
       _spawnAnchor = boundaries.alignment;
 

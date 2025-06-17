@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/data.dart';
 import '../core/utils/shortcuts/menu_shortcuts.dart';
 import 'context_menu_provider.dart';
 import 'context_menu_state.dart';
@@ -62,7 +63,8 @@ class ContextMenuWidget extends StatelessWidget {
     // }
 
     var boxDecoration = BoxDecoration(
-      color: Theme.of(context).colorScheme.surface,
+      color: FlutterContextMenuData_c.blockBgColor ??
+          Theme.of(context).colorScheme.surface,
       boxShadow: [
         BoxShadow(
           color: Theme.of(context).shadowColor.withValues(alpha: 0.5),

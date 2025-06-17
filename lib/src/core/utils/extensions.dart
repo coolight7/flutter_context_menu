@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 extension BuildContextExtensions on BuildContext {
-  Rect? getWidgetBounds() {
+  Rect? getWidgetBounds(Offset? pos) {
+    // 绝对定位 pos
     final widgetRenderBox = findRenderObject() as RenderBox?;
     if (widgetRenderBox == null) return null;
-    final widgetPosition = widgetRenderBox.localToGlobal(Offset.zero);
+    final widgetPosition = pos ?? widgetRenderBox.localToGlobal(Offset.zero);
     final widgetSize = widgetRenderBox.size;
     return widgetPosition & widgetSize;
   }
