@@ -88,7 +88,7 @@ final class MenuItem<T> extends ContextMenuItem<T> {
     // ~~~~~~~~~~ //
 
     return ConstrainedBox(
-      constraints: constraints ?? const BoxConstraints.expand(height: 32.0),
+      constraints: constraints ?? const BoxConstraints.expand(height: 48.0),
       child: Material(
         color: !enabled
             ? Colors.transparent
@@ -100,40 +100,38 @@ final class MenuItem<T> extends ContextMenuItem<T> {
         child: InkWell(
           onTap: !enabled ? null : () => handleItemSelection(context),
           canRequestFocus: false,
-          child: DefaultTextStyle(
-            style: textStyle,
-            child: Row(
-              children: [
-                SizedBox.square(
-                  dimension: 32.0,
+          child: Row(
+            children: [
+              SizedBox.square(
+                dimension: 32.0,
+                child: Icon(
+                  icon,
+                  size: 16.0,
+                  color: foregroundColor,
+                ),
+              ),
+              const SizedBox(width: 4.0),
+              Expanded(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: textStyle,
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              SizedBox.square(
+                dimension: 32.0,
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
                   child: Icon(
-                    icon,
+                    isSubmenuItem ? Icons.arrow_right : null,
                     size: 16.0,
                     color: foregroundColor,
                   ),
                 ),
-                const SizedBox(width: 4.0),
-                Expanded(
-                  child: Text(
-                    label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(width: 8.0),
-                SizedBox.square(
-                  dimension: 32.0,
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Icon(
-                      isSubmenuItem ? Icons.arrow_right : null,
-                      size: 16.0,
-                      color: foregroundColor,
-                    ),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
